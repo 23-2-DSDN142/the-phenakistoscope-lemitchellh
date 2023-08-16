@@ -1,10 +1,10 @@
 const SLICE_COUNT = 10;
 
 function setup_pScope(pScope){
-  pScope.output_mode(OUTPUT_GIF(500));
+  pScope.output_mode(ANIMATED_DISK);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
-  pScope.set_direction(CCW);
+  pScope.set_direction(CW);
   pScope.set_slice_count(SLICE_COUNT);
 }
 
@@ -13,66 +13,73 @@ function setup_layers(pScope){
   new PLayer(null, 100, 50, 90);  //lets us draw the whole circle background, ignoring the boundaries
 
 
-  var layer1 = new PLayer(faces);
+  var layer1 = new PLayer(faces); //outer squares
   layer1.mode( SWIRL(5) );
-  layer1.set_boundary( 200, 1000);
+  layer1.set_boundary( 0, 1000);
 
-  var layer4 = new PLayer(faces2);
+  var layer4 = new PLayer(faces2); //inner squares
   layer1.mode( SWIRL(6) );
-  layer1.set_boundary( 1000, 300);
+  layer1.set_boundary( 100, 800);
 
-  var layer2 = new PLayer(squares);
+  var layer2 = new PLayer(squares); //blue circle
   layer2.mode( RING );
   layer2.set_boundary( 0, 400 );
 
-  var layer3 = new PLayer(diamonds);
-  layer3.mode( SWIRL(9) );
-  layer3.set_boundary( 600, 100 );
+  var layer3 = new PLayer(diamonds); //pink jags
+  layer3.mode( SWIRL(3) );
+  layer3.set_boundary( 0, 1000 );
 
+  var layer4 = new PLayer(circles1); //circleboys
+  layer4.mode( SWIRL(3) );
+  layer4.set_boundary( 50,1000 );
 
 }
 
 function faces(x, y, animation, pScope){
-  
-  scale(animation.frame*2);
-  fill (190, 170, 190);
-  rect(5,5,50,50); // draw head
+  //outer squares
+  scale(animation.frame*1.2);
+  fill (160*animation.wave(.5)*5, 160*animation.wave(.5)*5, 190*animation.wave(5)*2);
+  rect(5*animation.wave(5)*5,5*animation.wave(5)*5,100*animation.wave(.5)*1,80*animation.wave(.5)*1.5); // draw head
 
 }
 
 function faces2 (x, y, animation, pScope){
-  scale( animation.frame*4.5);
-  fill (50, 90, 90);
-  rect(10,30-animation.wave(.5)*10,50,50)
+  //close squares
+  scale( animation.frame*3.5);
+  fill (50*animation.wave(2)*1.5, 90*animation.wave(2)*2, 90*animation.wave(2)*2);
+  rect(50*animation.wave(5)*2 ,20*animation.wave(5)*10,50,20)
 }
 
 function squares(x, y, animation, pScope){
 
-  // this is how you set up a background for a specific layer
+  // Middle circle
   let angleOffset = (360 / SLICE_COUNT) / 1
   let backgroundArcStart = 270 - angleOffset;
   let backgroundArcEnd = 270 + angleOffset;
 
-  fill(150, 150, 245)
-  arc(x,y,200,200,backgroundArcStart,backgroundArcEnd); // draws "pizza slice" in the background
+  fill(150*animation.wave(.5)*2, 150*animation.wave(.5)*1.5, 245*animation.wave(5)*5)
+  arc(x,y,15,200,backgroundArcStart *animation.wave(5),backgroundArcEnd); // draws "pizza slice" in the background
 
-  fill(0)
-  rect(-10,-30-animation.wave(.5)*10,20,20) // .wave is a cosine wave btw
+  fill(10 *animation.wave(.5)*5)
+  rect(10,30-animation.wave(.5)*10,20,20) // .wave is a cosine wave btw
 }
   
 function diamonds(x, y, animation, pScope){
-
-  let angleOffset = (360 / SLICE_COUNT) / .7
-  let backgroundArcStart = 180 - angleOffset;
+  //pink jags
+  let angleOffset = (360 / SLICE_COUNT) / 1
+  let backgroundArcStart = 90 - angleOffset;
   let backgroundArcEnd = 360 + angleOffset;
 
-scale (animation.frame*2);
+scale (animation.frame*1.5);
 
-  fill (255, 100, 110)
+  fill (255 *animation.wave(5)*10, 100 *animation.wave(5)*2, 110 *animation.wave(5)*3)
   arc(x + 250,y + 250,700,700,backgroundArcEnd,backgroundArcStart); // draws "pizza slice" in the background
+}
+  function circles1(x, y, animation, pScope){
 
-
- 
+    scale (animation.frame*1);
+fill (10 *animation.wave(5)*20, 10 *animation.wave(5)-10, 10 *animation.wave(5)+50)
+ellipse (x, y, 100*animation.wave(.5)*5, 75*animation.wave(3)*3)
 
   
   }
