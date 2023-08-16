@@ -14,40 +14,40 @@ function setup_layers(pScope){
 
 
   var layer1 = new PLayer(faces); //outer squares
-  layer1.mode( SWIRL(5) );
+  layer1.mode( SWIRL(12) );
   layer1.set_boundary( 0, 1000);
 
-  var layer4 = new PLayer(faces2); //inner squares
-  layer1.mode( SWIRL(6) );
+  var layer4 = new PLayer(faces2); //inner rainbow squares
+  layer1.mode( SWIRL(12) );
   layer1.set_boundary( 100, 800);
 
   var layer2 = new PLayer(squares); //blue circle
-  layer2.mode( RING );
-  layer2.set_boundary( 0, 400 );
+  layer2.mode( SWIRL(12) );
+  layer2.set_boundary( 10, 1000 );
 
   var layer3 = new PLayer(diamonds); //pink jags
-  layer3.mode( SWIRL(3) );
+  layer3.mode( SWIRL(12) );
   layer3.set_boundary( 0, 1000 );
 
   var layer4 = new PLayer(circles1); //circleboys
-  layer4.mode( SWIRL(3) );
-  layer4.set_boundary( 50,1000 );
+  layer4.mode( SWIRL(12) );
+  layer4.set_boundary( 850,1000 );
 
 }
 
 function faces(x, y, animation, pScope){
   //outer squares
   scale(animation.frame*1.2);
-  fill (160*animation.wave(.5)*5, 160*animation.wave(.5)*5, 190*animation.wave(5)*2);
+  fill (160*animation.wave(2)*5, 160*animation.wave(5)*5, 190*animation.wave(10)*2);
   rect(5*animation.wave(5)*5,5*animation.wave(5)*5,100*animation.wave(.5)*1,80*animation.wave(.5)*1.5); // draw head
 
 }
 
 function faces2 (x, y, animation, pScope){
-  //close squares
+  //Rainbow boys
   scale( animation.frame*3.5);
   fill (50*animation.wave(2)*1.5, 90*animation.wave(2)*2, 90*animation.wave(2)*2);
-  rect(50*animation.wave(5)*2 ,20*animation.wave(5)*10,50,20)
+  rect(50*animation.wave(.5)*20 ,20*animation.wave(.5)*100, 500,2)
 }
 
 function squares(x, y, animation, pScope){
@@ -60,8 +60,8 @@ function squares(x, y, animation, pScope){
   fill(150*animation.wave(.5)*2, 150*animation.wave(.5)*1.5, 245*animation.wave(5)*5)
   arc(x,y,15,200,backgroundArcStart *animation.wave(5),backgroundArcEnd); // draws "pizza slice" in the background
 
-  fill(10 *animation.wave(.5)*5)
-  rect(10,30-animation.wave(.5)*10,20,20) // .wave is a cosine wave btw
+  //fill(100 *animation.wave(.5)*5,) //white squares
+  //rect(70,30-animation.wave(.5)*10,20*animation.wave(5)*10,20*animation.wave(5)*10) // .wave is a cosine wave btw
 }
   
 function diamonds(x, y, animation, pScope){
@@ -72,7 +72,7 @@ function diamonds(x, y, animation, pScope){
 
 scale (animation.frame*1.5);
 
-  fill (255 *animation.wave(5)*10, 100 *animation.wave(5)*2, 110 *animation.wave(5)*3)
+  fill (255 *animation.wave(5)*10, 100 *animation.wave(5)*2, 110 *animation.wave(5)*3, 150*animation.wave(.6)*1.5)
   arc(x + 250,y + 250,700,700,backgroundArcEnd,backgroundArcStart); // draws "pizza slice" in the background
 }
   function circles1(x, y, animation, pScope){
