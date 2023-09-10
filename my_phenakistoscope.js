@@ -4,7 +4,7 @@ function setup_pScope(pScope){
   pScope.output_mode(OUTPUT_GIF(800));
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
-  pScope.set_direction(CW);
+  pScope.set_direction(CCW);
   pScope.set_slice_count(SLICE_COUNT);
 }
 
@@ -14,7 +14,7 @@ function setup_layers(pScope){
 
 
   var layer1 = new PLayer(faces); //rainbow squares squares
-  layer1.mode( SWIRL(10) );
+  layer1.mode( SWIRL(1) );
   layer1.set_boundary( 0, 500);
 
 
@@ -26,9 +26,9 @@ function setup_layers(pScope){
   layer1.mode( SWIRL(20) );
   layer1.set_boundary( 10, 400);
 
-  var layer2 = new PLayer(squares); //blue circle
-  layer2.mode( SWIRL(12) );
-  layer2.set_boundary( 150, 850 );
+  var layer2 = new PLayer(squares); //pink lines 
+  layer2.mode( SWIRL(6) );
+  layer2.set_boundary( 300, 850 );
 
   var layer3 = new PLayer(diamonds); //pink jags
   layer3.mode( SWIRL(6) );
@@ -42,9 +42,9 @@ function setup_layers(pScope){
   //layer9.mode( SWIRL(4));
   //layer9.set_boundary( 500, 1050 );
 
-  var layer4 = new PLayer(circles1); //circleboys outer rim
-  layer4.mode( SWIRL(12) );
-  layer4.set_boundary( 850, 1000 );
+  //var layer4 = new PLayer(circles1); //circleboys outer rim
+  //layer4.mode( SWIRL(12) );
+  //layer4.set_boundary( 850, 1000 );
 
   //var layer5 = new PLayer(whatever); //circleboys outer
   //layer5.mode( SWIRL(10) );
@@ -59,16 +59,33 @@ function setup_layers(pScope){
   //layer8.mode (SWIRL(12));
   //layer8.set_boundary (50,1000);
 
-  var layer11 = new PLayer(Squaret); //dark circle
-  layer11.mode (SWIRL(2));
-  layer11.set_boundary (500,850);
+  //var layer11 = new PLayer(Squaret); //dark circle
+  //layer11.mode (SWIRL(2));
+  //layer11.set_boundary (600,850);
 
-  var layer8 = new PLayer(Circlez); //circleboys innner
-  layer8.mode (SWIRL(10));
-  layer8.set_boundary (800, 980);
+  //var layer8 = new PLayer(Circlez); //circleboys green
+  //layer8.mode (SWIRL(28));
+  //layer8.set_boundary (800, 1300);
 
+var layer18 = new PLayer(design); //flowers
+layer18.mode (SWIRL(10));
+layer18.set_boundary (750, 1000);
 }
 
+function design(x, y, animation, pScope){
+  //pink jags
+  let angleOffset = (180 / SLICE_COUNT) / 1
+  let backgroundArcStart = 90 - angleOffset;
+  let backgroundArcEnd = 360 + angleOffset;
+  
+  strokeWeight(5*animation.wave(10)*3)
+  rotate(90*animation.frame*2)
+scale (animation.frame*1.6);
+  fill (225 *animation.wave(50)*500, 150*animation.wave(5)*3, 120 *animation.wave(5)*50, 250*animation.wave(.6)*1.5)
+  //rect(x/animation.wave(2)*1,y-200,50*animation.wave(2)*3,50*animation.wave(2)*3,backgroundArcStart*animation.wave(2)*10, backgroundArcEnd*animation.wave(20)*10 ,backgroundArcStart*animation.wave(2)*1,backgroundArcStart*animation.wave(2)*1); // draws "pizza slice" in the background
+  rotate(90*animation.wave(2)*10)
+  rect(x/animation.wave(2)*1,y-200,50*animation.wave(2)*3,50*animation.wave(2)*3,backgroundArcStart*animation.wave(100)*10, backgroundArcEnd*animation.wave(200)*10 ,backgroundArcStart*animation.wave(20)*100,backgroundArcStart*animation.wave(20)*100); // draws "pizza slice" in the background
+  }
 
 function diamonds(x, y, animation, pScope){
 
@@ -96,21 +113,24 @@ scale (animation.frame*.4);
   //rect(x + 50,y + 50,400,400,backgroundArcStart, backgroundArcEnd ,backgroundArcStart/2,backgroundArcStart/2); // draws "pizza slice" in the background
 //}
 
-function Circlez(x, y, animation, pScope){
-  strokeWeight(4)
-  scale (animation.frame*1.8);
+function Circlez(x, y, animation, pScope){ //green circles
+  //strokeWeight(4*animation.frame*1.2)
+  scale (animation.frame*1.2);
 fill (10*animation.wave(1)*1 , 50 *animation.wave(5)*40,  10 *animation.wave(5)*20, 250*animation.wave(9)/1)
-ellipse (120, 160, 140)
-rotate(75)
-ellipse (120, 160, 140)
+//rotate(90*animation.frame*2)
+//ellipse (120, 160, 100)
+rotate(1000*animation.frame*1)
+ellipse (200,230,150)
+
 }
 
-function Squaret(x, y, animation, pScope){ //dark circle
+//function Squaret(x, y, animation, pScope){ //dark circle
   strokeWeight(2)
     scale (animation.frame*1);
   fill (2*animation.wave(1)*10 , 20*animation.wave(1)*2,  100 *animation.wave(15)*2,)
-  ellipse (x, y , 50*animation.wave(5)*3,)
-  }
+  ellipse (x, y , 50*animation.wave(150)*3,)
+  
+//}
 
 
 
@@ -140,16 +160,16 @@ function Squaret(x, y, animation, pScope){ //dark circle
 
 
 function faces(x, y, animation, pScope){
-  //little rectangles
-  strokeWeight(2)
+  //jutting rectangles
+  strokeWeight(2*animation.frame)
   scale(animation.frame*6);
   fill (100*animation.wave(20)*5, 100*animation.wave(5)*1, 100*animation.wave(10)*12, 100/animation.wave(10)*2);
   rect(x, y, x+animation.wave(10)*100, y+20); // draw head
-  
+  rotate(180)
+  rect(x, y, x+animation.wave(10)*100, y+20)
+
 
 }
-
-
 
 
 //function faces2 (x, y, animation, pScope){
@@ -174,14 +194,15 @@ scale (animation.wave*1);
   fill (0 *animation.wave(5)*10, 10 *animation.wave(5)*2, 110 *animation.wave(5)*3, 100*animation.wave(6)*1.5)
   rect(x,y,500,500,backgroundArcEnd,backgroundArcStart); // draws "pizza slice" in the background
 //}
-  function circles1(x, y, animation, pScope){ //outer rim circles
+  
+
+//function circles1(x, y, animation, pScope){ //outer rim circles
 strokeWeight(10);
     scale (animation.frame*1);
 fill (10 *animation.wave(5)*20, 10 *animation.wave(5)-10, 10 *animation.wave(5)+50, 200*animation.wave(5)*10)
 ellipse (x, y, 100*animation.wave(.5)*5, 75*animation.wave(3)*3)
 
-  
-  }
+//}
 
   function squares(x, y, animation, pScope){
     
