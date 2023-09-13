@@ -10,8 +10,6 @@ function setup_pScope(pScope){
 
 function setup_layers(pScope){
 
-
-
   var layer1 = new PLayer(faces); //Blue pink rectangles
   layer1.mode( SWIRL(15) );
   layer1.set_boundary( 200, 400);
@@ -28,20 +26,20 @@ function setup_layers(pScope){
   layer4.mode(SWIRL(1));
   layer4.set_boundary(1,2)
 
-  var layer18 = new PLayer(design); //outer designs
-  layer18.mode (SWIRL(12));
-  layer18.set_boundary (750, 1250);
+  var layer5 = new PLayer(design); //outer designs
+  layer5.mode (SWIRL(12));
+  layer5.set_boundary (750, 1250);
 
 }
 
 
 
-function center(x,y, animation, pScope){ //black center
+function center(x,y, animation, pScope){ 
+  //black center
   noStroke();
-  fill( 1*animation.wave(1000)*3)
-  ellipse (10, 10, 50*animation.wave(1)*8.5, 50)
-     
-}
+  fill(1*animation.wave(1000)*3) //different shades of black
+  ellipse (10, 10, 50*animation.wave(1)*8.5, 50) //oval shape
+  }
 
 function design(x, y, animation, pScope){
   //outer blobs
@@ -49,56 +47,46 @@ function design(x, y, animation, pScope){
   let backgroundArcStart = 90 - angleOffset;
   let backgroundArcEnd = 360 + angleOffset;
   
-  
-  strokeWeight(8*animation.wave(10)*3)
-  stroke (50*animation.wave(10)*15,15*animation.wave(10)*2,115*animation.wave(100)*5) 
-  
-  scale (.5*animation.wave(1000)*2.5);
-  fill (225 *animation.wave(20)*5, 50*animation.wave(5)*3, 120 *animation.wave(5)*50, 220*animation.wave(10)*5)
-  rect(x/animation.wave(2)*1,y-200,50*animation.wave(2)*3,50*animation.wave(2)*3,backgroundArcStart*animation.wave(2)*10, backgroundArcEnd*animation.wave(20)*10 ,backgroundArcStart*animation.wave(2)*1,backgroundArcStart*animation.wave(2)*1); //
-  rotate(10*animation.wave(10)*10)
-  rect(x+animation.wave(2)*1,y-200,50*animation.wave(2)*3,50*animation.wave(2)*3,backgroundArcStart*animation.wave(10)/10, backgroundArcEnd*animation.wave(2)*100 ,backgroundArcStart*animation.wave(10)*1,backgroundArcStart*animation.wave(20)*100); // 
-  rotate(-180)
-  fill (5 *animation.wave(20)*5, 50*animation.wave(5)*3, 120 *animation.wave(5)*50, 20*animation.wave(1)*10)
-  rect(x+animation.wave(2)*10,y-200,50*animation.wave(2)*3,50*animation.wave(2)*3,backgroundArcStart*animation.wave(10)/10, backgroundArcEnd*animation.wave(2)*100 ,backgroundArcStart*animation.wave(10)*1,backgroundArcStart*animation.wave(20)*100); //   
+  strokeWeight(8*animation.wave(10)*3) //animates the stroke weight
+  stroke (50*animation.wave(10)*15,15*animation.wave(10)*2,115*animation.wave(100)*5) //animates the outline colours from blue/purple/red
+  scale (.5*animation.wave(1000)*2.5); //animates the scale of the blobs
+  fill (225 *animation.wave(20)*5, 50*animation.wave(5)*3, 120 *animation.wave(5)*50, 220*animation.wave(10)*5) //animates the fill between pink and blue
+  rect(x/animation.wave(2)*1,y-200,50*animation.wave(2)*3,50*animation.wave(2)*3,backgroundArcStart*animation.wave(2)*10, backgroundArcEnd*animation.wave(20)*10 ,backgroundArcStart*animation.wave(2)*1,backgroundArcStart*animation.wave(2)*1); // animates the shape of the rect
+  rotate(10*animation.wave(10)*10) //rotates shape, creates a more random movement
+  rect(x+animation.wave(2)*1,y-200,50*animation.wave(2)*3,50*animation.wave(2)*3,backgroundArcStart*animation.wave(10)/10, backgroundArcEnd*animation.wave(2)*100 ,backgroundArcStart*animation.wave(10)*1,backgroundArcStart*animation.wave(20)*100); //animates purpley shapes 
+  rotate(-180) //spaces the shapes apart
+  fill (5 *animation.wave(20)*5, 50*animation.wave(5)*3, 120 *animation.wave(5)*50, 20*animation.wave(1)*10)// brings more blue to the colour palette
+  rect(x+animation.wave(2)*10,y-200,50*animation.wave(2)*3,50*animation.wave(2)*3,backgroundArcStart*animation.wave(10)/10, backgroundArcEnd*animation.wave(2)*100 ,backgroundArcStart*animation.wave(10)*1,backgroundArcStart*animation.wave(20)*100); //more blue shapes   
 }
-function diamonds(x, y, animation, pScope){
 
+function diamonds(x, y, animation, pScope){
   //pink jags
   let angleOffset = (360 / SLICE_COUNT) / 1
   let backgroundArcStart = 90 - angleOffset;
   let backgroundArcEnd = 360 + angleOffset;
   
-
   strokeWeight(25*animation.wave(10)*1)
-  scale (animation.frame*.45);
-  rotate(1000*animation.wave(1)*.5)
-  fill (205 *animation.wave(15)*5, 50*animation.wave(5)*2, 140 *animation.wave(5)*4,10*animation.wave(2)*500)
-  rect(x,y,350,350,backgroundArcStart*animation.wave(5)*1, backgroundArcEnd*animation.wave(5)*2 ,backgroundArcStart*animation.wave(5)*2,backgroundArcStart*animation.wave(5)*1); // 
-  
-  strokeWeight(10*animation.wave(25)*5)
-  stroke( 155*animation.wave(10)*3, 20*animation.wave(1)*3, 150*animation.wave(1000)*3)
-  fill (65*animation.wave(50)*5, 150*animation.wave(5)*2, 210 *animation.wave(5)*1, 250*animation.wave(.6)*1.5)
-  rotate(10*animation.wave(1)*1)
-  rect(2500,5000,x+500,y+animation.wave(5)*500,backgroundArcStart*animation.wave(200)*1, backgroundArcEnd*animation.wave(5)*1 ,backgroundArcStart,backgroundArcStart); // 
-  
-}
+  scale (animation.frame*.45); //brings shapes to an acceptable smaller scale
+  rotate(1000*animation.wave(1)*.5) // adds more random movement and spaces out shapes
+  fill (205 *animation.wave(15)*5, 50*animation.wave(5)*2, 140 *animation.wave(5)*4,10*animation.wave(2)*500)// animates the red/blue colours
+  rect(x,y,350,350,backgroundArcStart*animation.wave(5)*1, backgroundArcEnd*animation.wave(5)*2 ,backgroundArcStart*animation.wave(5)*2,backgroundArcStart*animation.wave(5)*1); //creates the shape, animates it's form 
+  }
 
 
 
 function faces(x, y, animation, pScope){
   //jutting rectangles
-  stroke(200*animation.wave(20)*5, 10*animation.wave(5)*1, 150*animation.wave(10)*2)
+  stroke(200*animation.wave(20)*5, 10*animation.wave(5)*1, 150*animation.wave(10)*2)//colours the stroke to pinkish
   strokeWeight(2*animation.frame*1.5)
-  scale(animation.frame*6);
-  fill (100*animation.wave(20)*5, 100*animation.wave(5)*1, 100*animation.wave(10)*12, 200+animation.wave(10)*2);
-  rect(x, y, x+animation.wave(10)*50, y+20);
-  rotate(180)
-  rect(x, y, x+animation.wave(10)*50, y+20)
+  scale(animation.frame*6); //controls size of rectangles and blue background
+  fill (100*animation.wave(20)*5, 100*animation.wave(5)*1, 100*animation.wave(10)*12, 200+animation.wave(10)*2);//animates colour of rectangles
+  rect(x, y, x+animation.wave(10)*50, y+20); //controls shape of rectangle 
+  rotate(180) //pushes rectangle out further, changes position of blue background
+  rect(x, y, x+animation.wave(10)*50, y+20) //controls shape of outer rectangle
   scale(1)
-  strokeWeight(10)
-  pScope.fill_background(205*animation.wave(100)*1, 50*animation.wave(100)*2, 110*animation.wave(1)*15, 40*animation.wave(1)*2)
-   }
+  strokeWeight(10) //brings in harsher edges on the background
+  pScope.fill_background(205*animation.wave(100)*1, 50*animation.wave(100)*2, 110*animation.wave(1)*15, 40*animation.wave(1)*2)// brings in blue background
+  }
 
 
 
@@ -108,10 +96,10 @@ function faces(x, y, animation, pScope){
     let backgroundArcStart = 270 - angleOffset;
     let backgroundArcEnd = 270 + angleOffset;
     strokeWeight(4*animation.wave(1)*1)
-    fill(200 *animation.wave(5)*5, 60*animation.wave(.5)*2, 150*animation.wave(.5)*2) //white squares
-    rect(0,9*animation.wave(5)*10,20*animation.wave(5)*1,20*animation.wave(5)*10) //
-    scale(.3)
-    pScope.fill_background(205*animation.wave(1)*10, 50*animation.wave(10)*2, 10*animation.wave(1)*15, 100*animation.wave(1)*2)
+    fill(200 *animation.wave(5)*5, 60*animation.wave(.5)*2, 150*animation.wave(.5)*2) //gives the pink colour
+    rect(0,9*animation.wave(5)*10,20*animation.wave(5)*1,20*animation.wave(5)*10) // changes shape of rect
+    scale(.3) //changes form of pink background
+    pScope.fill_background(205*animation.wave(1)*10, 50*animation.wave(10)*2, 10*animation.wave(1)*15, 100*animation.wave(1)*2)// brings in pink background shapes
   }
 
 
