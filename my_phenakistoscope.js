@@ -1,10 +1,10 @@
 const SLICE_COUNT = 12;
 
 function setup_pScope(pScope){
-  pScope.output_mode(OUTPUT_GIF(800));
+  pScope.output_mode(ANIMATED_DISK);
   pScope.scale_for_screen(true);
   pScope.draw_layer_boundaries(false);
-  pScope.set_direction(CCW);
+  pScope.set_direction(CW);
   pScope.set_slice_count(SLICE_COUNT);
 }
 
@@ -14,10 +14,6 @@ function setup_layers(pScope){
 
 
   var layer1 = new PLayer(faces); //rainbow squares squares
-  layer1.mode( SWIRL(1) );
-  layer1.set_boundary( 0, 500);
-
-  //var layer4 = new PLayer(faces2); //inner rainbow squares
   layer1.mode( SWIRL(15) );
   layer1.set_boundary( 200, 400);
 
@@ -27,7 +23,7 @@ function setup_layers(pScope){
 
   var layer3 = new PLayer(diamonds); //pink jags
   layer3.mode( SWIRL(8) );
-  layer3.set_boundary( 100, 650 );
+  layer3.set_boundary( 100, 450 );
 
   var layer4 = new PLayer(center);
   layer4.mode(SWIRL(1));
@@ -39,9 +35,11 @@ function setup_layers(pScope){
 
 
 //var layer17 = new PLayer(back); //backg)
-//layer17.mode (SWIRL(1));
-//layer17.set_boundary (0,1000)
+//layer17.mode (SWIRL(10));
+//layer17.set_boundary (500,1000)
 }
+
+
 
 function center(x,y, animation, pScope){
   noStroke();
@@ -79,19 +77,19 @@ function diamonds(x, y, animation, pScope){
   
 
   //stroke(250 *animation.wave(2)*21, 200*animation.wave(1)*2, 100*animation.wave(1)*2, 210*animation.wave(1)*8)
-  strokeWeight(35*animation.wave(10)*1)
+  strokeWeight(25*animation.wave(10)*1)
   scale (animation.frame*.45);
-  rotate(100*animation.wave(1)*100)
-  fill (65 *animation.wave(50)*5, 150*animation.wave(5)*1, 240 *animation.wave(5)*1,100*animation.wave(20)*50)
-  rect(x,y,400,400,backgroundArcStart*animation.wave(5)*1, backgroundArcEnd*animation.wave(5)*1 ,backgroundArcStart*animation.wave(5)*10,backgroundArcStart*animation.wave(5)*10); // draws "pizza slice" in the background
+  rotate(1000*animation.wave(1)*.5)
+  fill (205 *animation.wave(15)*5, 50*animation.wave(5)*2, 140 *animation.wave(5)*4,10*animation.wave(2)*500)
+  rect(x,y,350,350,backgroundArcStart*animation.wave(5)*1, backgroundArcEnd*animation.wave(5)*2 ,backgroundArcStart*animation.wave(5)*2,backgroundArcStart*animation.wave(5)*1); // draws "pizza slice" in the background
   
-  
-  //rotate(-180)
-  //rect(x,y,500,500,backgroundArcStart*animation.wave(5)*1, backgroundArcEnd*animation.wave(500)*5 ,backgroundArcStart,backgroundArcStart); // draws "pizza slice" in the background
-  //fill (65*animation.wave(50)*5, 150*animation.wave(5)*2, 210 *animation.wave(5)*1, 250*animation.wave(.6)*1.5)
-  //rotate(100*animation.wave(1)*1)
-  //rect(2500,5000,x+500,y+animation.wave(5)*500,backgroundArcStart*animation.wave(5)*1, backgroundArcEnd*animation.wave(500)*5 ,backgroundArcStart,backgroundArcStart); // draws "pizza slice" in the background
+  strokeWeight(10*animation.wave(25)*5)
+  stroke( 155*animation.wave(10)*3, 20*animation.wave(1)*3, 150*animation.wave(1000)*3)
+  fill (65*animation.wave(50)*5, 150*animation.wave(5)*2, 210 *animation.wave(5)*1, 250*animation.wave(.6)*1.5)
+  rotate(10*animation.wave(1)*1)
+  rect(2500,5000,x+500,y+animation.wave(5)*500,backgroundArcStart*animation.wave(200)*1, backgroundArcEnd*animation.wave(5)*1 ,backgroundArcStart,backgroundArcStart); // draws "pizza slice" in the background
   }
+
 
 
 function faces(x, y, animation, pScope){
